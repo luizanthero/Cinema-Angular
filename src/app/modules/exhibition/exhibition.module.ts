@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ExhibitionRoutingModule } from './exhibition-routing.module';
 
 import { SharedModule } from 'src/app/shared';
+import { OmdbService } from 'src/app/shared/services';
+
 import { SelectExhibitionComponent } from './components';
 import { ExhibitionService } from './service';
 
@@ -16,6 +18,6 @@ import { ExhibitionService } from './service';
     SharedModule,
     ExhibitionRoutingModule,
   ],
-  providers: [ExhibitionService],
+  providers: [ExhibitionService, OmdbService],
 })
 export class ExhibitionModule {}

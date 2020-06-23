@@ -14,7 +14,7 @@ export class ExhibitionService {
 
   getAll(): Observable<any> {
     return this.http
-      .get(this.baseUrl)
+      .get(`${this.baseUrl}/details`)
       .map((response) => response as Exhibition)
       .catch((error) => Observable.throw(error.error));
   }

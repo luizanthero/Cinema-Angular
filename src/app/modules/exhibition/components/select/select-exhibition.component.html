@@ -1,1 +1,31 @@
-<p>select-exhibition works!</p>
+<div class="card-deck" style="margin: 30px;">
+  <div
+    *ngFor="let exhibition of exhibitions"
+    class="card"
+    style="max-width: 18rem;"
+  >
+    <img
+      class="card-img-top"
+      src="{{ exhibition.poster }}"
+      alt="{{ exhibition.film }}"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ exhibition.film }}</h5>
+      <p class="card-text">
+        {{ exhibition.year }}
+      </p>
+      <p class="card-text">
+        Room: {{ exhibition.room }} - Schedule:
+        {{ exhibition.schedule }}
+      </p>
+      <a (click)="details(exhibition.id)" class="btn btn-primary">
+        Details
+      </a>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">
+        Running since {{ exhibition.created_at | date: "mediumDate" }}
+      </small>
+    </div>
+  </div>
+</div>
