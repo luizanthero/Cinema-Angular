@@ -7,11 +7,14 @@ import { ExhibitionRoutingModule } from './exhibition-routing.module';
 import { SharedModule } from 'src/app/shared';
 import { OmdbService } from 'src/app/shared/services';
 
-import { SelectExhibitionComponent } from './components';
+import {
+  SelectExhibitionComponent,
+  ModalExhibitionComponent,
+} from './components';
 import { ExhibitionService } from './service';
 
 @NgModule({
-  declarations: [SelectExhibitionComponent],
+  declarations: [SelectExhibitionComponent, ModalExhibitionComponent],
   imports: [
     CommonModule,
     HttpClientModule,
