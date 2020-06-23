@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'ngx-alerts';
-
-import { Exhibition } from 'src/app/shared';
+import { MatDialog } from '@angular/material';
 
 import { ExhibitionService } from '../../service';
+import { FilmService } from 'src/app/modules/film/service';
+import { ModalExhibitionComponent } from '../modal-exhibition';
 
 @Component({
   selector: 'app-select-exhibition',
@@ -11,11 +12,13 @@ import { ExhibitionService } from '../../service';
   styleUrls: ['./select-exhibition.component.css'],
 })
 export class SelectExhibitionComponent implements OnInit {
-  exhibitions: Exhibition[];
+  exhibitions: any[];
 
   constructor(
     private service: ExhibitionService,
-    private alert: AlertService
+    private filmService: FilmService,
+    private alert: AlertService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -31,5 +34,10 @@ export class SelectExhibitionComponent implements OnInit {
 
   details(id: number): void {
     this.alert.info(`Selected film: ${id}`);
+
+    const dialogRef = this.dialog.open(ModalExhibitionComponent, {
+      width: '100%',
+      data: { id },
+    });
   }
 }
