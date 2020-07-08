@@ -40,8 +40,6 @@ export class SelectExhibitionComponent implements OnInit {
   }
 
   details(id: number): void {
-    this.alert.info(`Selected film: ${id}`);
-
     const dialogConfig = new MatDialogConfig();
     this.filmService.getById(id).subscribe(
       (response) => {
@@ -58,13 +56,16 @@ export class SelectExhibitionComponent implements OnInit {
                 <strong>Genre:</strong> ${this.film.genre} - <strong>Awards:</strong> ${this.film.awards}
               </p>
               <p>
-                <strong>Year:</strong> ${this.film.year} - <strong>Runtime:</strong> ${this.film.runtime}
+                <strong>Year:</strong> ${this.film.year} - <strong>Runtime:</strong> ${this.film.runtime} - <strong>Type:</strong> ${this.film.type}
               </p>
               <p>
                 <strong>Production:</strong> ${this.film.production} - <strong>Director:</strong> ${this.film.director}
               </p>
               <p>
                 <strong>Countries:</strong> ${this.film.country} - <strong>Languages:</strong> ${this.film.language}
+              </p>
+              <p>
+                <strong>Website:</strong> ${this.film.website}
               </p>
               <p>
                 <strong>Plot:</strong> ${this.film.plot}
