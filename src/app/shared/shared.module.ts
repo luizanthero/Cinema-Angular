@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +13,8 @@ import {
   ModalDynamicComponent,
   LoadingComponent,
 } from './components';
-import { OmdbService } from './services';
+import { OmdbService, LoaderService } from './services';
+import { LoaderInterceptorService } from './interceptors';
 
 const material = [
   MatFormFieldModule,
@@ -31,6 +33,14 @@ const components = [
   declarations: [...components],
   imports: [CommonModule, RouterModule, ...material],
   exports: [...components],
-  providers: [OmdbService],
+  providers: [
+    OmdbService,
+    LoaderService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptorService,
+      multi: true,
+    },
+  ],
 })
 export class SharedModule {}
