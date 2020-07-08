@@ -1,13 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+import { ModalDynamic } from '../../models';
+
 @Component({
   selector: 'app-modal-dynamic',
   templateUrl: './modal-dynamic.component.html',
   styleUrls: ['./modal-dynamic.component.css'],
 })
 export class ModalDynamicComponent implements OnInit {
-  result: any;
+  result: ModalDynamic;
 
   constructor(
     private dialog: MatDialogRef<ModalDynamicComponent>,
@@ -21,4 +23,6 @@ export class ModalDynamicComponent implements OnInit {
   close(): void {
     this.dialog.close();
   }
+
+  save(): void {}
 }

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'ngx-alerts';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
+import { Film, ModalDynamic } from 'src/app/shared';
 import { ModalDynamicComponent } from 'src/app/shared/components';
 
 import { ExhibitionService } from '../../service';
 import { FilmService } from 'src/app/modules/film/service';
-import { Film } from 'src/app/shared';
 
 @Component({
   selector: 'app-select-exhibition',
@@ -47,6 +47,7 @@ export class SelectExhibitionComponent implements OnInit {
       (response) => {
         this.film = response;
 
+        //#region [Modal Content]
         const content = `<div class="card-deck">
           <div class="card">
             <img class="card-img-top" src=${this.film.poster} alt=${this.film.name} title=${this.film.name} />
@@ -71,13 +72,14 @@ export class SelectExhibitionComponent implements OnInit {
             </div>
           </div>
         </div>`;
+        //#endregion
 
-        dialogConfig.data = {
-          id: this.film.id,
-          title: this.film.name,
-          content: content,
-          isDetails: true,
-        };
+        dialogConfig.data = new ModalDynamic(
+          this.film.id,
+          this.film.name,
+          content,
+          true
+        );
 
         this.dialog.open(ModalDynamicComponent, dialogConfig);
       },
