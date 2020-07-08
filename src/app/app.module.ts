@@ -1,27 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AlertModule } from 'ngx-alerts';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { SharedModule } from './shared';
+import { ModalDynamicComponent } from './shared/components';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
     AlertModule.forRoot({ maxMessages: 5, timeout: 5000, position: 'right' }),
+    MatDialogModule,
     SharedModule,
     AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [ModalDynamicComponent],
 })
 export class AppModule {}

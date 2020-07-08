@@ -1,0 +1,13 @@
+<h1 mat-dialog-title class="display-4">{{ result.title }}</h1>
+<hr class="my-4" />
+<div mat-dialog-content [innerHtml]="result.content"></div>
+<hr class="my-4" />
+<div mat-dialog-actions *ngIf="result.isDetails">
+  <button mat-button cdkFocusInitial (click)="close()">Ok</button>
+</div>
+<div mat-dialog-actions *ngIf="!result.isDetails">
+  <button mat-button class="btn btn-success" (click)="close()">Save</button>
+  <button mat-button class="btn btn-danger" cdkFocusInitial (click)="close()">
+    Cancel
+  </button>
+</div>
