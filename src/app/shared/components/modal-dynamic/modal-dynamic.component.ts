@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModalDynamic } from '../../models';
 
 @Component({
-  selector: 'app-modal-dynamic',
+  selector: 'cine-modal-dynamic',
   templateUrl: './modal-dynamic.component.html',
   styleUrls: ['./modal-dynamic.component.css'],
 })
