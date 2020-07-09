@@ -9,10 +9,17 @@ import { LoginRoutingModule } from './login-routing.module';
 import { SharedModule } from 'src/app/shared';
 
 import { LoginService } from './service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AuthenticationComponent],
-  imports: [CommonModule, HttpClientModule, SharedModule, LoginRoutingModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    SharedModule,
+    LoginRoutingModule,
+  ],
   providers: [LoginService],
 })
 export class LoginModule {}

@@ -1,1 +1,207 @@
-<p>authentication works!</p>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <!-- form card login -->
+          <div class="card rounded-0" id="login-form">
+            <div class="card-header">
+              <h3 class="mb-0">Cinema Login</h3>
+            </div>
+            <div class="card-body">
+              <form
+                #formLogin="ngForm"
+                class="form"
+                role="form"
+                autocomplete="off"
+                id="formLogin"
+              >
+                <div class="form-group">
+                  <label>Username</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg rounded-0"
+                    name="username"
+                    id="username"
+                    [(ngModel)]="user.username"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control form-control-lg rounded-0"
+                    id="password"
+                    [(ngModel)]="user.password"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="custom-control custom-checkbox">
+                    <a [routerLink]="['/register']" class="register-form-link"
+                      >Register</a
+                    >
+                  </label>
+                  <label class="custom-control custom-checkbox">
+                    <a class="forgot-form-link">Forgot Password</a>
+                  </label>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-success btn-lg float-right"
+                  id="btnLogin"
+                  (click)="login()"
+                  [disabled]="!formLogin.form.valid"
+                >
+                  Login
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- /form card login end-->
+
+          <!-- form card register -->
+          <!-- <div class="card rounded-0" id="register-form">
+            <div class="card-header">
+              <h3 class="mb-0">New Account</h3>
+            </div>
+            <div class="card-body">
+              <form
+                class="form"
+                role="form"
+                autocomplete="off"
+                id="formLogin"
+                novalidate=""
+                method="POST"
+              >
+                <div class="form-group">
+                  <label for="uname1">Username</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg rounded-0"
+                    name="uname1"
+                    id="uname1"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="uname1">Name</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg rounded-0"
+                    name="uname1"
+                    id="uname1"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    class="form-control form-control-lg rounded-0"
+                    id="pwd1"
+                    required=""
+                    autocomplete="new-password"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    class="form-control form-control-lg rounded-0"
+                    id="pwd1"
+                    required=""
+                    autocomplete="new-password"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>E-mail:</label>
+                  <input
+                    type="email"
+                    class="form-control form-control-lg rounded-0"
+                    id="pwd1"
+                    required=""
+                    autocomplete="new-password"
+                  />
+                </div>
+                <div>
+                  <label class="custom-control custom-checkbox">
+                    I have an account.
+                    <a
+                      href="javascript:void('register-form-load');"
+                      class="login-form-link"
+                      >Login.</a
+                    >
+                  </label>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-success btn-lg float-right"
+                  id="btnLogin"
+                >
+                  Register
+                </button>
+              </form>
+            </div>
+          </div> -->
+          <!-- /form card register end -->
+
+          <!-- form card forgot -->
+          <!-- <div class="card rounded-0" id="forgot-form">
+            <div class="card-header">
+              <h3 class="mb-0">Reset Password</h3>
+            </div>
+            <div class="card-body">
+              <form
+                class="form"
+                role="form"
+                autocomplete="off"
+                id="formLogin"
+                novalidate=""
+                method="POST"
+              >
+                <div class="form-group">
+                  <label>E-mail</label>
+                  <input
+                    type="email"
+                    class="form-control form-control-lg rounded-0"
+                    id="pwd1"
+                    required=""
+                    autocomplete="new-password"
+                  />
+                </div>
+                <div>
+                  <label class="custom-control custom-checkbox">
+                    <a
+                      href="javascript:void('register-form-link');"
+                      class="register-form-link"
+                      >Register</a
+                    >
+                  </label>
+                  <label class="custom-control custom-checkbox">
+                    <a
+                      href="javascript:void('login-form-link');"
+                      class="login-form-link"
+                      >Login</a
+                    >
+                  </label>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-success btn-lg float-right"
+                  id="btnLogin"
+                >
+                  Reset Password
+                </button>
+              </form>
+            </div>
+          </div> -->
+          <!-- /form card forgot end -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<cine-loading></cine-loading>

@@ -6,3 +6,4 @@ export * from './register.model';
 export * from './filmOmdb.model';
 
 export * from './modalDynamic.model';
+export * from './authenticateResponse.model';

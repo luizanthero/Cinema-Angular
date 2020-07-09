@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
-import { Authenticate, Register } from 'src/app/shared';
+import { Authenticate, AuthenticateResponse, Register } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class LoginService {
   authenticate(auth: Authenticate): Observable<any> {
     return this.http
       .post(`${this.base_url}/authenticate`, auth)
-      .map((response) => response as Authenticate)
+      .map((response) => response as AuthenticateResponse)
       .catch((error) => Observable.throw(error.error));
   }
 
