@@ -11,6 +11,5 @@ export class LoaderService {
 
   changeState(state: boolean): void {
     this.isLoading.next(state);
-    console.log('valor do isLoding: ', this.isLoading);
   }
 }

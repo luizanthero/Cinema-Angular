@@ -31,8 +31,6 @@ export class LoaderInterceptorService {
   ): Observable<HttpEvent<any>> {
     this.requests.push(req);
 
-    console.log('No of requests--->' + this.requests.length);
-
     this.loaderService.changeState(true);
     return Observable.create((observer) => {
       const subscription = next.handle(req).subscribe(
