@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
@@ -16,6 +15,11 @@ const routes: Routes = [
       import('./modules/exhibition/exhibition.module').then(
         (item) => item.ExhibitionModule
       ),
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./modules/login/login.module').then((item) => item.LoginModule),
   },
   {
     path: '**',

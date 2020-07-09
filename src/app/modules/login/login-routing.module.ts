@@ -9,7 +9,7 @@ const routes: Routes = [
     component: AuthenticationComponent,
   },
   {
-    path: '/authenticate',
+    path: 'authenticate',
     component: AuthenticationComponent,
   },
 ];
