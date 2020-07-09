@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
+
 import { Film } from 'src/app/shared';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FilmService {
-  private baseUrl: string = 'https://localhost:5001/api/Films';
+  private baseUrl: string = `${environment.base_url}/Films`;
 
   constructor(private http: HttpClient) {}
 
