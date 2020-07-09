@@ -5,7 +5,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class LoaderService {
+  isLoading = new BehaviorSubject(false);
+
   constructor() {}
 
-  isLoading = new BehaviorSubject(false);
+  changeState(state: boolean): void {
+    this.isLoading.next(state);
+    console.log('valor do isLoding: ', this.isLoading);
+  }
 }

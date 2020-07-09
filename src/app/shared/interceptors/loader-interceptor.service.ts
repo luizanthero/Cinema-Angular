@@ -22,7 +22,7 @@ export class LoaderInterceptorService {
     if (i >= 0) {
       this.requests.splice(i, 1);
     }
-    this.loaderService.isLoading.next(this.requests.length > 0);
+    this.loaderService.changeState(this.requests.length > 0);
   }
 
   intercept(
@@ -33,7 +33,7 @@ export class LoaderInterceptorService {
 
     console.log('No of requests--->' + this.requests.length);
 
-    this.loaderService.isLoading.next(true);
+    this.loaderService.changeState(true);
     return Observable.create((observer) => {
       const subscription = next.handle(req).subscribe(
         (event) => {
