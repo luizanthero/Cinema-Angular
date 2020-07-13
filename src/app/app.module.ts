@@ -13,6 +13,7 @@ import {
   NavbarReducer,
   AuthenticateReducer,
   MenuReducer,
+  LoaderReducer,
 } from './shared';
 import { ModalDynamicComponent } from './shared/components';
 
@@ -20,6 +21,7 @@ const reducers = {
   navbar: NavbarReducer,
   isAuth: AuthenticateReducer,
   menus: MenuReducer,
+  loader: LoaderReducer,
 };
 
 @NgModule({
