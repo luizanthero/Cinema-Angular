@@ -17,23 +17,8 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Films</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Rooms</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Rooms Types</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Schedules</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Screens</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Users</a>
+      <li class="nav-item" *ngFor="let menu of (menus$ | async).menus">
+        <a class="nav-link" [routerLink]="menu.path">{{ menu.text }}</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

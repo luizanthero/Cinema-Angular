@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AlertService } from 'ngx-alerts';
 import { Store } from '@ngrx/store';
 
-import { Authenticate, Hide, Show, Login } from 'src/app/shared';
+import { Authenticate, Hide, Show, Login, IsAuth } from 'src/app/shared';
 
 import { LoginService } from '../../service';
 import { Observable } from 'rxjs';
@@ -21,22 +21,21 @@ export class AuthenticationComponent implements OnInit {
 
   navbar$: Observable<any>;
   isAuth$: Observable<any>;
+  menus$: Observable<any>;
 
   constructor(
     private service: LoginService,
     private router: Router,
     private alert: AlertService,
-    private store: Store<{ navbar: boolean; isAuth: boolean }>
+    private store: Store<{ navbar: boolean; isAuth: boolean; menus: any }>
   ) {
     this.navbar$ = this.store.select('navbar');
     this.isAuth$ = this.store.select('isAuth');
+    this.menus$ = this.store.select('menus');
   }
 
   ngOnInit(): void {
     this.store.dispatch(Hide());
-    this.navbar$.subscribe((response) => {
-      console.log(response);
-    });
     this.user = new Authenticate('', '');
   }
 
@@ -52,6 +51,13 @@ export class AuthenticationComponent implements OnInit {
 
           this.store.dispatch(Show());
           this.store.dispatch(Login());
+          this.store.dispatch(
+            IsAuth({ payload: [{ text: 'Films', path: 'films' }] })
+          );
+
+          this.menus$.subscribe((response) =>
+            console.log('Menus Auth', response)
+          );
 
           this.router.navigate(['/']);
         },
