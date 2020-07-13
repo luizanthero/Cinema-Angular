@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light"
+  *ngIf="(navbar$ | async).navbar"
+>
   <button
     class="navbar-toggler"
     type="button"
@@ -34,10 +37,15 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <a class="btn btn-outline-info my-2 my-sm-0" [routerLink]="['/login']">
+      <a
+        *ngIf="!(isAuth$ | async).isAuth"
+        class="btn btn-outline-info my-2 my-sm-0"
+        [routerLink]="['/login']"
+      >
         Login
       </a>
       <button
+        *ngIf="(isAuth$ | async).isAuth"
         class="btn btn-outline-info my-2 my-sm-0"
         type="submit"
         (click)="logout()"

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'cine-navbar',
@@ -7,7 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private router: Router) {}
+  navbar$: Observable<any>;
+  isAuth$: Observable<any>;
+
+  constructor(
+    private router: Router,
+    private store: Store<{ navbar: boolean; isAuth: boolean }>
+  ) {
+    this.navbar$ = this.store.select('navbar');
+    this.isAuth$ = this.store.select('isAuth');
+  }
 
   ngOnInit(): void {}
 

@@ -42,19 +42,9 @@ const services = [
   NavbarService,
 ];
 
-const reducers = {
-  navbar: NavbarReducer,
-  isAuth: AuthenticateReducer,
-};
-
 @NgModule({
   declarations: [...components],
-  imports: [
-    CommonModule,
-    RouterModule,
-    StoreModule.forRoot(reducers),
-    ...material,
-  ],
+  imports: [CommonModule, RouterModule, ...material],
   exports: [...components],
   providers: [...services],
 })
