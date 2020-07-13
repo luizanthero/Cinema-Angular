@@ -1,2 +1,2 @@
 export * from './omdb.service';
-export * from './navbar.service';
+export * from './menus.service';

@@ -13,7 +13,7 @@ import {
   ModalDynamicComponent,
   LoadingComponent,
 } from './components';
-import { OmdbService, NavbarService } from './services';
+import { OmdbService, MenusService } from './services';
 import { LoaderInterceptorService } from './interceptors';
 
 const material = [
@@ -36,7 +36,7 @@ const services = [
     useClass: LoaderInterceptorService,
     multi: true,
   },
-  NavbarService,
+  MenusService,
 ];
 
 @NgModule({
