@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
@@ -11,12 +11,18 @@ import { Film } from 'src/app/shared';
 })
 export class FilmService {
   private baseUrl: string = `${environment.base_url}/Films`;
+  private headers: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${sessionStorage['token']}`
+    );
+  }
 
   getAll(): Observable<any> {
     return this.http
-      .get(`${this.baseUrl}/details`)
+      .get(`${this.baseUrl}`, { headers: this.headers })
       .map((response) => response as Film)
       .catch((error) => Observable.throw(error));
   }

@@ -1,1 +1,20 @@
-<p>select-films works!</p>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">ApiCode</th>
+      <th scope="col">Year</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let film of films">
+      <th scope="row">{{ film.id }}</th>
+      <td>{{ film.name }}</td>
+      <td>{{ film.apiCode }}</td>
+      <td>{{ film.year }}</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
