@@ -23,11 +23,7 @@ export class NavbarComponent implements OnInit {
     this.menus$ = this.store.select('menus');
   }
 
-  ngOnInit(): void {
-    this.menus$.subscribe((response) =>
-      console.log('Menus - Navbar', response)
-    );
-  }
+  ngOnInit(): void {}
 
   logout(): void {
     sessionStorage.removeItem('token');

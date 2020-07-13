@@ -55,10 +55,6 @@ export class AuthenticationComponent implements OnInit {
             IsAuth({ payload: [{ text: 'Films', path: 'films' }] })
           );
 
-          this.menus$.subscribe((response) =>
-            console.log('Menus Auth', response)
-          );
-
           this.router.navigate(['/']);
         },
         (error) => this.alert.danger(`Error: ${error.message}`)
