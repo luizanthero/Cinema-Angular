@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,6 @@ export class MenusService {
   constructor() {}
 
   getAll(): Observable<any> {
-    return this.menus;
+    return of(this.menus);
   }
 }

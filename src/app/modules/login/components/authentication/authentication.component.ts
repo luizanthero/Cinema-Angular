@@ -4,7 +4,14 @@ import { Router } from '@angular/router';
 import { AlertService } from 'ngx-alerts';
 import { Store } from '@ngrx/store';
 
-import { Authenticate, Hide, Show, Login, IsAuth } from 'src/app/shared';
+import {
+  Authenticate,
+  Hide,
+  Show,
+  Login,
+  IsAuth,
+  MenusService,
+} from 'src/app/shared';
 
 import { LoginService } from '../../service';
 import { Observable } from 'rxjs';
@@ -25,6 +32,7 @@ export class AuthenticationComponent implements OnInit {
 
   constructor(
     private service: LoginService,
+    private menus: MenusService,
     private router: Router,
     private alert: AlertService,
     private store: Store<{ navbar: boolean; isAuth: boolean; menus: any }>
@@ -51,11 +59,14 @@ export class AuthenticationComponent implements OnInit {
 
           this.store.dispatch(Show());
           this.store.dispatch(Login());
-          this.store.dispatch(
-            IsAuth({ payload: [{ text: 'Films', path: 'films' }] })
-          );
 
-          this.router.navigate(['/']);
+          this.menus.getAll().subscribe(
+            (response) => {
+              this.store.dispatch(IsAuth({ payload: response }));
+              this.router.navigate(['/']);
+            },
+            (error) => this.alert.danger(`Error: ${error.error}`)
+          );
         },
         (error) => this.alert.danger(`Error: ${error.message}`)
       );
