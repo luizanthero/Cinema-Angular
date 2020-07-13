@@ -8,12 +8,18 @@ import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { SharedModule, NavbarReducer, AuthenticateReducer } from './shared';
+import {
+  SharedModule,
+  NavbarReducer,
+  AuthenticateReducer,
+  MenuReducer,
+} from './shared';
 import { ModalDynamicComponent } from './shared/components';
 
 const reducers = {
   navbar: NavbarReducer,
   isAuth: AuthenticateReducer,
+  menus: MenuReducer,
 };
 
 @NgModule({
