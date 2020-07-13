@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +16,7 @@ import {
 } from './components';
 import { OmdbService, LoaderService, NavbarService } from './services';
 import { LoaderInterceptorService } from './interceptors';
+import { NavbarReducer } from './reducers';
 
 const material = [
   MatFormFieldModule,
@@ -42,7 +44,12 @@ const services = [
 
 @NgModule({
   declarations: [...components],
-  imports: [CommonModule, RouterModule, ...material],
+  imports: [
+    CommonModule,
+    RouterModule,
+    StoreModule.forRoot({ navbar: NavbarReducer }),
+    ...material,
+  ],
   exports: [...components],
   providers: [...services],
 })
