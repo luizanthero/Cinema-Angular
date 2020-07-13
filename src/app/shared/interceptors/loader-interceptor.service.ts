@@ -6,21 +6,17 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 import { Store } from '@ngrx/store';
+
 import { ChangeLoader } from '../reducers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoaderInterceptorService {
-  private loading$: Observable<any>;
-
   private requests: HttpRequest<any>[] = [];
 
-  constructor(private store: Store<{ loader: boolean }>) {
-    this.loading$ = this.store.select('loader');
-  }
+  constructor(private store: Store<{ loader: boolean }>) {}
 
   removeRequest(req: HttpRequest<any>) {
     const i = this.requests.indexOf(req);
