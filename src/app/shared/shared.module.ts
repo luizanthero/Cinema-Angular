@@ -16,7 +16,7 @@ import {
 } from './components';
 import { OmdbService, LoaderService, NavbarService } from './services';
 import { LoaderInterceptorService } from './interceptors';
-import { NavbarReducer } from './reducers';
+import { NavbarReducer, AuthenticateReducer } from './reducers';
 
 const material = [
   MatFormFieldModule,
@@ -42,12 +42,17 @@ const services = [
   NavbarService,
 ];
 
+const reducers = {
+  navbar: NavbarReducer,
+  isAuth: AuthenticateReducer,
+};
+
 @NgModule({
   declarations: [...components],
   imports: [
     CommonModule,
     RouterModule,
-    StoreModule.forRoot({ navbar: NavbarReducer }),
+    StoreModule.forRoot(reducers),
     ...material,
   ],
   exports: [...components],
