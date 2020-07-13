@@ -9,7 +9,7 @@ export const Login = createAction(ActionTypes.Login);
 export const Logout = createAction(ActionTypes.Logout);
 
 const INITIAL_STATE = {
-  isAuth: false,
+  isAuth: sessionStorage['isAuth'],
 };
 
 export const AuthenticateReducer = createReducer(

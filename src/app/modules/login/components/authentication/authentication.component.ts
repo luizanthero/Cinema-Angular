@@ -54,6 +54,7 @@ export class AuthenticationComponent implements OnInit {
           sessionStorage.setItem('token', response.token);
           sessionStorage.setItem('username', this.user.username);
           sessionStorage.setItem('roles', response.roles);
+          sessionStorage.setItem('isAuth', 'true');
 
           this.alert.info(`Welcome ${this.user.username}`);
 
@@ -63,6 +64,7 @@ export class AuthenticationComponent implements OnInit {
           this.menus.getAll().subscribe(
             (response) => {
               this.store.dispatch(IsAuth({ payload: response }));
+
               this.router.navigate(['/']);
             },
             (error) => this.alert.danger(`Error: ${error.error}`)
