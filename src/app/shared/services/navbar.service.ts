@@ -13,11 +13,11 @@ export class NavbarService {
     this.isLoggedIn.next(false);
   }
 
-  get getLinks(): Array<any> {
+  getLinks(): Array<any> {
     return this.links;
   }
 
-  get getLoginStatus(): Subject<boolean> {
+  getLoginStatus(): Subject<boolean> {
     return this.isLoggedIn;
   }
 
