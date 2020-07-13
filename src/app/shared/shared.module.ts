@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,9 +13,8 @@ import {
   ModalDynamicComponent,
   LoadingComponent,
 } from './components';
-import { OmdbService, LoaderService, NavbarService } from './services';
+import { OmdbService, NavbarService } from './services';
 import { LoaderInterceptorService } from './interceptors';
-import { NavbarReducer, AuthenticateReducer } from './reducers';
 
 const material = [
   MatFormFieldModule,
@@ -33,7 +31,6 @@ const components = [
 
 const services = [
   OmdbService,
-  LoaderService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: LoaderInterceptorService,

@@ -7,7 +7,6 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { LoaderService } from '../services';
 import { Store } from '@ngrx/store';
 import { ChangeLoader } from '../reducers';
 
@@ -19,10 +18,7 @@ export class LoaderInterceptorService {
 
   private requests: HttpRequest<any>[] = [];
 
-  constructor(
-    private loaderService: LoaderService,
-    private store: Store<{ loader: boolean }>
-  ) {
+  constructor(private store: Store<{ loader: boolean }>) {
     this.loading$ = this.store.select('loader');
   }
 
@@ -31,7 +27,6 @@ export class LoaderInterceptorService {
     if (i >= 0) {
       this.requests.splice(i, 1);
     }
-    this.loaderService.changeState(this.requests.length > 0);
     this.store.dispatch(ChangeLoader({ payload: this.requests.length > 0 }));
   }
 
@@ -41,7 +36,6 @@ export class LoaderInterceptorService {
   ): Observable<HttpEvent<any>> {
     this.requests.push(req);
 
-    this.loaderService.changeState(true);
     this.store.dispatch(ChangeLoader({ payload: true }));
     return Observable.create((observer) => {
       const subscription = next.handle(req).subscribe(
