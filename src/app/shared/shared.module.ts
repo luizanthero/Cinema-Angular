@@ -13,7 +13,7 @@ import {
   ModalDynamicComponent,
   LoadingComponent,
 } from './components';
-import { OmdbService, LoaderService } from './services';
+import { OmdbService, LoaderService, NavbarService } from './services';
 import { LoaderInterceptorService } from './interceptors';
 
 const material = [
@@ -29,18 +29,21 @@ const components = [
   LoadingComponent,
 ];
 
+const services = [
+  OmdbService,
+  LoaderService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoaderInterceptorService,
+    multi: true,
+  },
+  NavbarService,
+];
+
 @NgModule({
   declarations: [...components],
   imports: [CommonModule, RouterModule, ...material],
   exports: [...components],
-  providers: [
-    OmdbService,
-    LoaderService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoaderInterceptorService,
-      multi: true,
-    },
-  ],
+  providers: [...services],
 })
 export class SharedModule {}
