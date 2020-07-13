@@ -22,6 +22,11 @@ const routes: Routes = [
       import('./modules/login/login.module').then((item) => item.LoginModule),
   },
   {
+    path: 'films',
+    loadChildren: () =>
+      import('./modules/film/film.module').then((item) => item.FilmModule),
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
