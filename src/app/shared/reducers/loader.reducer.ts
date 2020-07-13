@@ -1,12 +1,13 @@
-import { createAction, createReducer, on } from '@ngrx/store';
+import { createAction, createReducer, on, props } from '@ngrx/store';
 
 enum ActionTypes {
-  Show = 'Show',
-  Hide = 'Hide',
+  Change = 'Change',
 }
 
-export const ShowLoader = createAction(ActionTypes.Show);
-export const HideLoader = createAction(ActionTypes.Hide);
+export const ChangeLoader = createAction(
+  ActionTypes.Change,
+  props<{ payload: boolean }>()
+);
 
 const INITIAL_STATE = {
   loader: false,
@@ -14,6 +15,8 @@ const INITIAL_STATE = {
 
 export const LoaderReducer = createReducer(
   INITIAL_STATE,
-  on(ShowLoader, (state) => ({ ...state, loader: true })),
-  on(HideLoader, (state) => ({ ...state, loader: true }))
+  on(ChangeLoader, (state, action: any) => ({
+    ...state,
+    loader: action.payload,
+  }))
 );

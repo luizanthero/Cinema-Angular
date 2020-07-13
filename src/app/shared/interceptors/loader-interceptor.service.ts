@@ -8,14 +8,23 @@ import {
 import { Observable } from 'rxjs';
 
 import { LoaderService } from '../services';
+import { Store } from '@ngrx/store';
+import { ChangeLoader } from '../reducers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoaderInterceptorService {
+  private loading$: Observable<any>;
+
   private requests: HttpRequest<any>[] = [];
 
-  constructor(private loaderService: LoaderService) {}
+  constructor(
+    private loaderService: LoaderService,
+    private store: Store<{ loader: boolean }>
+  ) {
+    this.loading$ = this.store.select('loader');
+  }
 
   removeRequest(req: HttpRequest<any>) {
     const i = this.requests.indexOf(req);
@@ -23,6 +32,7 @@ export class LoaderInterceptorService {
       this.requests.splice(i, 1);
     }
     this.loaderService.changeState(this.requests.length > 0);
+    this.store.dispatch(ChangeLoader({ payload: this.requests.length > 0 }));
   }
 
   intercept(
@@ -32,6 +42,7 @@ export class LoaderInterceptorService {
     this.requests.push(req);
 
     this.loaderService.changeState(true);
+    this.store.dispatch(ChangeLoader({ payload: true }));
     return Observable.create((observer) => {
       const subscription = next.handle(req).subscribe(
         (event) => {

@@ -1,4 +1,4 @@
-<div [hidden]="!loading" class="overlay">
+<div [hidden]="!(loading$ | async).loader" class="overlay">
   <mat-progress-spinner
     class="spinner"
     mode="indeterminate"
