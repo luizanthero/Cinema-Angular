@@ -30,16 +30,16 @@ export class TableDynamicComponent implements OnChanges {
 
   columnsObject: any[] = [];
 
-  constructor() {}
-
-  ngOnChanges(): void {
+  constructor() {
     sessionStorage
       .getItem('roles')
       .split(',')
       .map((item) => {
         this.roles.push(+item);
       });
+  }
 
+  ngOnChanges(): void {
     if (this.columns && !this.actions) {
       this.addActionButtons();
       this.columnsObject = this.columns.map((item) =>
@@ -84,10 +84,6 @@ export class TableDynamicComponent implements OnChanges {
 
   getSelectPermission(): boolean {
     return this.roles.some((el, index, array) => el === 1);
-  }
-
-  getCreatePermission(): boolean {
-    return this.roles.some((el, index, array) => el === 2);
   }
 
   getUpdatePermission(): boolean {

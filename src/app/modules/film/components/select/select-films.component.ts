@@ -30,11 +30,19 @@ const TableColumns = [
   styleUrls: ['./select-films.component.css'],
 })
 export class SelectFilmsComponent implements OnInit {
-  films: Film[];
+  private roles: number[] = [];
 
+  films: Film[];
   columns: any[] = TableColumns;
 
-  constructor(private service: FilmService, private alert: AlertService) {}
+  constructor(private service: FilmService, private alert: AlertService) {
+    sessionStorage
+      .getItem('roles')
+      .split(',')
+      .map((item) => {
+        this.roles.push(+item);
+      });
+  }
 
   ngOnInit(): void {
     this.service.getAll().subscribe(
@@ -59,5 +67,9 @@ export class SelectFilmsComponent implements OnInit {
         console.log('Delete Action');
         break;
     }
+  }
+
+  getCreatePermission(): boolean {
+    return this.roles.some((el, index, array) => el === 2);
   }
 }
