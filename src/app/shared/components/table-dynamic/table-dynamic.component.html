@@ -1,0 +1,64 @@
+<div class="col-lg-12">
+  <div class="col-lg-12" style="text-align: left;">
+    <h2>List of {{ tableName }}</h2>
+  </div>
+  <div class="col-lg-12" style="text-align: right;">
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      *ngIf="getCreatePermission()"
+    >
+      Create
+    </button>
+  </div>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Ex. name"
+      #input
+    />
+  </mat-form-field>
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container
+      *ngFor="let column of columns"
+      matColumnDef="{{ column.column }}"
+    >
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        column.title
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element[column.column] }}
+        <div
+          class="btn-group btn-group-toggle"
+          data-toggle="buttons"
+          *ngIf="column.column === 'actions'"
+        >
+          <label class="btn btn-primary" *ngIf="getUpdatePermission()"
+            ><input type="radio" (click)="sendAction('edit', element)" /> Edit
+          </label>
+          <label class="btn btn-secondary" *ngIf="getSelectPermission()"
+            ><input type="radio" (click)="sendAction('select', element)" />
+            Details
+          </label>
+          <label class="btn btn-danger" *ngIf="getDeletePermission()"
+            ><input type="radio" (click)="sendAction('delete', element)" />
+            Delete
+          </label>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="columnsObject"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsObject"></mat-row>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </mat-table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

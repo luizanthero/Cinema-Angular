@@ -5,6 +5,25 @@ import { Film } from 'src/app/shared';
 
 import { FilmService } from '../../service';
 
+const TableColumns = [
+  {
+    column: 'id',
+    title: '#',
+  },
+  {
+    column: 'name',
+    title: 'Name',
+  },
+  {
+    column: 'apiCode',
+    title: 'ApiCode',
+  },
+  {
+    column: 'year',
+    title: 'Year',
+  },
+];
+
 @Component({
   selector: 'app-select-films',
   templateUrl: './select-films.component.html',
@@ -12,8 +31,8 @@ import { FilmService } from '../../service';
 })
 export class SelectFilmsComponent implements OnInit {
   films: Film[];
-  roles: number[] = [];
-  tableName: string = 'Films';
+
+  columns: any[] = TableColumns;
 
   constructor(private service: FilmService, private alert: AlertService) {}
 
@@ -26,28 +45,19 @@ export class SelectFilmsComponent implements OnInit {
       },
       (error) => this.alert.danger(`Error: ${error}`)
     );
-
-    sessionStorage
-      .getItem('roles')
-      .split(',')
-      .map((item) => {
-        this.roles.push(+item);
-      });
   }
 
-  getSelectPermission(): boolean {
-    return this.roles.some((el, index, array) => el === 1);
-  }
-
-  getCreatePermission(): boolean {
-    return this.roles.some((el, index, array) => el === 2);
-  }
-
-  getUpdatePermission(): boolean {
-    return this.roles.some((el, index, array) => el === 3);
-  }
-
-  getDeletePermission(): boolean {
-    return this.roles.some((el, index, array) => el === 4);
+  callback(event): void {
+    switch (event.action) {
+      case 'edit':
+        console.log('Edit Action');
+        break;
+      case 'select':
+        console.log('Details Action');
+        break;
+      case 'delete':
+        console.log('Delete Action');
+        break;
+    }
   }
 }
