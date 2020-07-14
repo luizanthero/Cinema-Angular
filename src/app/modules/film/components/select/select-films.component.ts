@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'ngx-alerts';
+import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { Film, ModalDynamic } from 'src/app/shared';
@@ -22,6 +23,7 @@ export class SelectFilmsComponent implements OnInit {
 
   constructor(
     private service: FilmService,
+    private router: Router,
     private alert: AlertService,
     private dialog: MatDialog
   ) {
