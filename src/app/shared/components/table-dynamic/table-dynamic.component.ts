@@ -29,6 +29,7 @@ export class TableDynamicComponent implements OnChanges {
   private actions: boolean = false;
 
   columnsObject: any[] = [];
+  isEmpty: boolean = false;
 
   constructor() {
     sessionStorage
@@ -72,6 +73,12 @@ export class TableDynamicComponent implements OnChanges {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+
+    if (this.dataSource.filteredData.length === 0) {
+      this.isEmpty = true;
+    } else {
+      this.isEmpty = false;
     }
   }
 

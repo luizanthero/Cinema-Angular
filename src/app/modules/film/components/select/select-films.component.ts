@@ -4,25 +4,7 @@ import { AlertService } from 'ngx-alerts';
 import { Film } from 'src/app/shared';
 
 import { FilmService } from '../../service';
-
-const TableColumns = [
-  {
-    column: 'id',
-    title: '#',
-  },
-  {
-    column: 'name',
-    title: 'Name',
-  },
-  {
-    column: 'apiCode',
-    title: 'ApiCode',
-  },
-  {
-    column: 'year',
-    title: 'Year',
-  },
-];
+import { TableColumns } from './select-films.config';
 
 @Component({
   selector: 'app-select-films',
@@ -58,7 +40,7 @@ export class SelectFilmsComponent implements OnInit {
   callback(event): void {
     switch (event.action) {
       case 'edit':
-        console.log('Edit Action');
+        console.log('Edit Action', event.row);
         break;
       case 'select':
         console.log('Details Action');

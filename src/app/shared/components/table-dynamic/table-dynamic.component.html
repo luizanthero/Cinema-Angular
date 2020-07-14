@@ -39,12 +39,10 @@
     </ng-container>
     <mat-header-row *matHeaderRowDef="columnsObject"></mat-header-row>
     <mat-row *matRowDef="let row; columns: columnsObject"></mat-row>
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">
-        No data matching the filter "{{ input.value }}"
-      </td>
-    </tr>
   </mat-table>
+  <div class="col-lg-12" style="text-align: center;" *ngIf="isEmpty">
+    <span> No data matching the filter "{{ input.value }}" </span>
+  </div>
   <mat-paginator
     [pageSizeOptions]="[5, 10, 25, 100]"
     showFirstLastButtons
