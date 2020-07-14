@@ -6,11 +6,11 @@ import { FilmRoutingModule } from './film-routing.module';
 
 import { SharedModule } from 'src/app/shared';
 
-import { SelectFilmsComponent } from './components';
+import { SelectFilmsComponent, CreateFilmComponent } from './components';
 import { FilmService } from './service';
 
 @NgModule({
-  declarations: [SelectFilmsComponent],
+  declarations: [SelectFilmsComponent, CreateFilmComponent],
   imports: [CommonModule, HttpClientModule, SharedModule, FilmRoutingModule],
   providers: [FilmService],
 })

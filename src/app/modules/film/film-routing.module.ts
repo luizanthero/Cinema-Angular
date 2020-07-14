@@ -1,12 +1,16 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { SelectFilmsComponent } from './components';
+import { SelectFilmsComponent, CreateFilmComponent } from './components';
 
 const routes: Routes = [
   {
     path: '',
     component: SelectFilmsComponent,
+  },
+  {
+    path: 'create',
+    component: CreateFilmComponent,
   },
 ];
 
