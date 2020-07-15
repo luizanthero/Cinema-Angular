@@ -20,6 +20,12 @@ export class TableDynamicComponent implements OnChanges {
   @Input() dataSource: any;
   @Input() columns: any;
 
+  @Input() isPaginate: boolean = false;
+  @Input() dataLength: number = 0;
+  @Input() pageSize: number = 0;
+  @Input() pageSizeOptions: any = [5, 10, 25, 100];
+  @Input() pageIndex: number = 0;
+
   @Output() rowAction = new EventEmitter();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
