@@ -50,7 +50,6 @@ export class TableDynamicComponent implements OnChanges {
 
     if (this.dataSource) {
       this.dataSource = new MatTableDataSource(this.dataSource);
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
   }

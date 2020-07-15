@@ -21,6 +21,7 @@ import {
 } from './components';
 import { OmdbService, MenusService } from './services';
 import { LoaderInterceptorService } from './interceptors';
+import { TablePaginatorComponent } from './components/table-dynamic/table-paginator/table-paginator.component';
 
 const material = [
   MatFormFieldModule,
@@ -52,7 +53,7 @@ const services = [
 ];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, TablePaginatorComponent],
   imports: [CommonModule, RouterModule, ...material],
   exports: [...components],
   providers: [...services],

@@ -43,8 +43,5 @@
   <div class="col-lg-12" style="text-align: center;" *ngIf="isEmpty">
     <span> No data matching the filter "{{ input.value }}" </span>
   </div>
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    showFirstLastButtons
-  ></mat-paginator>
+  <cine-table-paginator [dataSource]="dataSource"></cine-table-paginator>
 </div>
