@@ -1,8 +1,19 @@
-<p>create-film works!</p>
-<button
-  type="button"
-  class="btn btn-outline-secondary"
-  [routerLink]="['/films']"
->
-  back
-</button>
+<div class="col-lg-12" style="text-align: left;">
+  <h2>Create a Film</h2>
+</div>
+<cine-table-dynamic
+  [tableName]="'Films'"
+  [dataSource]="films"
+  [columns]="columns"
+  (rowAction)="callback($event)"
+></cine-table-dynamic>
+<br />
+<div class="col-lg-12">
+  <button
+    type="button"
+    class="btn btn-outline-secondary"
+    [routerLink]="['/films']"
+  >
+    back
+  </button>
+</div>

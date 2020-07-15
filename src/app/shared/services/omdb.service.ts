@@ -18,4 +18,11 @@ export class OmdbService {
       .map((response) => response as FilmOmdb)
       .catch((error) => Observable.throw(error));
   }
+
+  getFilm(search: string, page: number): Observable<any> {
+    return this.http
+      .get(`${this.baseUrl}&s=${search}&page=${page}`)
+      .map((response) => response as FilmOmdb)
+      .catch((error) => Observable.throw(error));
+  }
 }
