@@ -5,7 +5,13 @@
   [tableName]="'Films'"
   [dataSource]="films"
   [columns]="columns"
+  [isPaginate]="true"
+  [dataLength]="dataLength"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageIndex]="pageIndex"
   (rowAction)="callback($event)"
+  (sendPaginatorAction)="paginatorAction($event)"
 ></cine-table-dynamic>
 <br />
 <div class="col-lg-12">

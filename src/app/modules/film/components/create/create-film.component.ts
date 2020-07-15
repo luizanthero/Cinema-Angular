@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AlertService } from 'ngx-alerts';
 
 import { OmdbService } from 'src/app/shared';
-import { Observable, of } from 'rxjs';
 
 const TableColumns = [
   {
@@ -31,8 +30,12 @@ const TableColumns = [
 })
 export class CreateFilmComponent implements OnInit {
   films: any[];
-  result: any[] = [];
   columns: any[] = TableColumns;
+
+  dataLength: number;
+  pageSize: number;
+  pageSizeOptions: any;
+  pageIndex: number;
 
   constructor(
     private router: Router,
@@ -41,26 +44,28 @@ export class CreateFilmComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    for (let i = 1; i <= 17; i++) {
-      this.filmOmdb.getFilm('guardians', i).subscribe(
-        (response) => {
-          response.Search.map((item) => {
-            this.result.push(item);
-          });
-        },
-        (error) => this.alert.danger(`Error: ${error.error}`)
-      );
-    }
-
-    this.getResult().subscribe((response) => {
-      this.films = response;
-      console.log(this.films);
-    });
+    let page: number = 1;
+    this.loadFilms(page);
   }
 
-  getResult(): Observable<any> {
-    return of(this.result);
+  loadFilms(page: number) {
+    this.filmOmdb.getFilm('guardians', page).subscribe(
+      (response) => {
+        this.films = response.Search;
+        this.dataLength = +response.totalResults;
+        this.pageSize = +response.Search.length;
+        this.pageSizeOptions = [this.pageSize];
+        this.pageIndex = page;
+        console.log(response);
+      },
+      (error) => this.alert.danger(`Error: ${error.error}`)
+    );
   }
 
   callback(event): void {}
+
+  paginatorAction(event): void {
+    console.log(event);
+    this.loadFilms(event);
+  }
 }
