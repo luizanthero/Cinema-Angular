@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  ViewChild,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
@@ -15,6 +22,8 @@ export class TablePaginatorComponent implements OnChanges {
   @Input() pageSizeOptions: any;
   @Input() pageIndex: number;
 
+  @Output() paginatorAction = new EventEmitter();
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   private skip: number = 1;
@@ -30,12 +39,11 @@ export class TablePaginatorComponent implements OnChanges {
   }
 
   changePage(event) {
-    console.log(event);
-
     if (this.isPaginate) {
       if (this.dataLength > this.dataSource.length) {
         if (this.pageIndex < event.pageIndex) {
           this.skip = this.skip + this.pageSize;
+          this.paginatorAction.emit(this.skip);
         }
       }
     }

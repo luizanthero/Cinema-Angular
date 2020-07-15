@@ -27,6 +27,7 @@ export class TableDynamicComponent implements OnChanges {
   @Input() pageIndex: number = 0;
 
   @Output() rowAction = new EventEmitter();
+  @Output() sendPaginatorAction = new EventEmitter();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -92,6 +93,10 @@ export class TableDynamicComponent implements OnChanges {
     content.action = action;
     content.row = row;
     this.rowAction.emit(content);
+  }
+
+  paginatorAction(event): void {
+    this.sendPaginatorAction.emit(event);
   }
 
   getSelectPermission(): boolean {
