@@ -12,8 +12,9 @@
   </button>
 </div>
 <cine-table-dynamic
-  [tableName]="'Films'"
   [dataSource]="films"
   [columns]="columns"
+  [hasAction]="hasAction"
+  [actions]="actions"
   (rowAction)="callback($event)"
 ></cine-table-dynamic>

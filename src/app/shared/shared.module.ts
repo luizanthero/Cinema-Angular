@@ -19,9 +19,10 @@ import {
   LoadingComponent,
   TableDynamicComponent,
 } from './components';
+import { TablePaginatorComponent } from './components/table-dynamic/table-paginator';
+import { TableButtonsComponent } from './components/table-dynamic/table-buttons';
 import { OmdbService, MenusService } from './services';
 import { LoaderInterceptorService } from './interceptors';
-import { TablePaginatorComponent } from './components/table-dynamic/table-paginator/table-paginator.component';
 
 const material = [
   MatFormFieldModule,
@@ -40,6 +41,8 @@ const components = [
   ModalDynamicComponent,
   LoadingComponent,
   TableDynamicComponent,
+  TablePaginatorComponent,
+  TableButtonsComponent,
 ];
 
 const services = [
@@ -53,7 +56,7 @@ const services = [
 ];
 
 @NgModule({
-  declarations: [...components, TablePaginatorComponent],
+  declarations: [...components],
   imports: [CommonModule, RouterModule, ...material],
   exports: [...components],
   providers: [...services],

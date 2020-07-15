@@ -18,22 +18,11 @@
       }}</mat-header-cell>
       <mat-cell *matCellDef="let element">
         {{ element[column.column] }}
-        <div
-          class="btn-group btn-group-toggle"
-          data-toggle="buttons"
-          *ngIf="column.column === 'actions'"
-        >
-          <label class="btn btn-primary" *ngIf="getUpdatePermission()"
-            ><input type="radio" (click)="sendAction('edit', element)" /> Edit
-          </label>
-          <label class="btn btn-secondary" *ngIf="getSelectPermission()"
-            ><input type="radio" (click)="sendAction('select', element)" />
-            Details
-          </label>
-          <label class="btn btn-danger" *ngIf="getDeletePermission()"
-            ><input type="radio" (click)="sendAction('delete', element)" />
-            Delete
-          </label>
+        <div *ngIf="column.column === 'actions'">
+          <cine-table-buttons
+            [actions]="actions"
+            (buttonClick)="receiveAction($event, element)"
+          ></cine-table-buttons>
         </div>
       </mat-cell>
     </ng-container>

@@ -1,0 +1,9 @@
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label
+    *ngFor="let button of buttons"
+    [ngClass]="buttonsConfig[0][button.column].class"
+  >
+    <input type="radio" (click)="sendAction(button)" />
+    {{ buttonsConfig[0][button.column].text }}
+  </label>
+</div>

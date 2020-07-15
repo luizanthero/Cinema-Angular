@@ -16,15 +16,21 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./table-dynamic.component.css'],
 })
 export class TableDynamicComponent implements OnChanges {
-  @Input() tableName: string;
   @Input() dataSource: any;
   @Input() columns: any;
 
+  //#region [Paginator]
   @Input() isPaginate: boolean = false;
   @Input() dataLength: number = 0;
   @Input() pageSize: number = 0;
   @Input() pageSizeOptions: any = [5, 10, 25, 100];
   @Input() pageIndex: number = 0;
+  //#endregion
+
+  //#region [Buttons]
+  @Input() hasAction: boolean;
+  @Input() actions: any;
+  //#endregion
 
   @Output() rowAction = new EventEmitter();
   @Output() sendPaginatorAction = new EventEmitter();
@@ -32,23 +38,15 @@ export class TableDynamicComponent implements OnChanges {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  private roles: number[] = [];
-  private actions: boolean = false;
+  private action: boolean = false;
 
   columnsObject: any[] = [];
   isEmpty: boolean = false;
 
-  constructor() {
-    sessionStorage
-      .getItem('roles')
-      .split(',')
-      .map((item) => {
-        this.roles.push(+item);
-      });
-  }
+  constructor() {}
 
   ngOnChanges(): void {
-    if (this.columns && !this.actions) {
+    if (this.columns && !this.action) {
       this.addActionButtons();
       this.columnsObject = this.columns.map((item) =>
         typeof item.column === 'number' ? item.column.toString() : item.column
@@ -62,16 +60,18 @@ export class TableDynamicComponent implements OnChanges {
   }
 
   addActionButtons(): void {
-    const actionColumn = {
-      column: 'actions',
-      title: 'Actions',
-    };
+    if (this.hasAction) {
+      this.action = true;
 
-    this.actions = true;
+      const actionColumn = {
+        column: 'actions',
+        title: 'Actions',
+      };
 
-    this.actions
-      ? (this.columns = [...this.columns, actionColumn])
-      : (this.columns = this.columns);
+      this.actions
+        ? (this.columns = [...this.columns, actionColumn])
+        : (this.columns = this.columns);
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -88,26 +88,15 @@ export class TableDynamicComponent implements OnChanges {
     }
   }
 
-  sendAction(action, row): void {
+  receiveAction(action, row): void {
     let content = { row: '', action: '' };
     content.action = action;
     content.row = row;
+
     this.rowAction.emit(content);
   }
 
   paginatorAction(event): void {
     this.sendPaginatorAction.emit(event);
-  }
-
-  getSelectPermission(): boolean {
-    return this.roles.some((el, index, array) => el === 1);
-  }
-
-  getUpdatePermission(): boolean {
-    return this.roles.some((el, index, array) => el === 3);
-  }
-
-  getDeletePermission(): boolean {
-    return this.roles.some((el, index, array) => el === 4);
   }
 }

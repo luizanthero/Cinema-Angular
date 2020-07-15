@@ -20,6 +20,8 @@ export class SelectFilmsComponent implements OnInit {
   films: Film[];
   film: Film;
   columns: any[] = TableColumns;
+  hasAction: boolean = true;
+  actions: any[] = [];
 
   constructor(
     private service: FilmService,
@@ -33,6 +35,29 @@ export class SelectFilmsComponent implements OnInit {
       .map((item) => {
         this.roles.push(+item);
       });
+
+    this.roles.forEach((item) => {
+      switch (item) {
+        case 1:
+          this.actions.push({
+            column: 'details',
+            title: 'Details',
+          });
+          break;
+        case 3:
+          this.actions.push({
+            column: 'edit',
+            title: 'Edit',
+          });
+          break;
+        case 4:
+          this.actions.push({
+            column: 'delete',
+            title: 'Delete',
+          });
+          break;
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -47,11 +72,11 @@ export class SelectFilmsComponent implements OnInit {
   }
 
   callback(event): void {
-    switch (event.action) {
+    switch (event.action.column) {
       case 'edit':
         console.log('Edit Action');
         break;
-      case 'select':
+      case 'details':
         this.details(event.row.id);
         break;
       case 'delete':
