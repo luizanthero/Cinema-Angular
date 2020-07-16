@@ -1,6 +1,21 @@
 <div class="col-lg-12" style="text-align: left;">
   <h2>Create a Film</h2>
 </div>
+<br />
+<div class="col-lg-12">
+  <div class="row">
+    <div class="col-lg-5" style="text-align: right;"><h3>Search:</h3></div>
+    <div class="col-lg-4">
+      <input
+        type="text"
+        class="form-control"
+        (keyup)="applySearch($event.target.value)"
+        style="max-width: 18rem; text-align: center;"
+      />
+    </div>
+  </div>
+</div>
+<br /><br /><br />
 <cine-table-dynamic
   [dataSource]="films"
   [columns]="columns"

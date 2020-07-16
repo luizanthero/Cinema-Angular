@@ -18,6 +18,7 @@ export class CreateFilmComponent implements OnInit {
   private roles: number[] = [];
   private actions: any[] = [];
   private showMessage: boolean = true;
+  private searchValue: string;
 
   films: any;
   film: FilmOmdb;
@@ -60,24 +61,38 @@ export class CreateFilmComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    let page: number = 1;
-    this.loadFilms(page);
+  ngOnInit(): void {}
+
+  applySearch(value: string): void {
+    if (value.length >= 3) {
+      this.showMessage = true;
+      this.searchValue = value.trim().toLowerCase();
+      this.loadFilms(this.searchValue, 1);
+    } else {
+      this.films = [];
+    }
   }
 
-  loadFilms(page: number): void {
-    this.filmOmdb.getFilm('guardians', page).subscribe(
+  loadFilms(value: string, page: number): void {
+    this.filmOmdb.getFilm(value, page).subscribe(
       (response) => {
         if (this.showMessage) {
-          this.alert.success(`Number of Films: ${response.totalResults}`);
-          this.showMessage = false;
+          let numFilms: number = 0;
+          if (response.totalResults) {
+            numFilms = response.totalResults;
+            this.showMessage = false;
+          }
+
+          this.alert.success(`Number of Films: ${numFilms}`);
         }
 
-        this.films = response.Search;
-        this.dataLength = +response.totalResults;
-        this.pageSize = +response.Search.length;
-        this.pageSizeOptions = [this.pageSize];
-        this.pageIndex = page;
+        if (response.Search) {
+          this.films = response.Search;
+          this.dataLength = +response.totalResults;
+          this.pageSize = +response.Search.length;
+          this.pageSizeOptions = [this.pageSize];
+          this.pageIndex = page;
+        }
       },
       (error) => this.alert.danger(`Error: ${error.message}`),
       () => {
@@ -188,7 +203,7 @@ export class CreateFilmComponent implements OnInit {
             `Register Created: ${response.id} - ${response.name}`
           );
 
-          this.loadFilms(1);
+          this.loadFilms(this.searchValue, 1);
         },
         (error) => {
           this.alert.danger(`Error: ${error.message}`);
@@ -198,6 +213,6 @@ export class CreateFilmComponent implements OnInit {
   }
 
   paginatorAction(event): void {
-    this.loadFilms(event);
+    this.loadFilms(this.searchValue, event);
   }
 }
