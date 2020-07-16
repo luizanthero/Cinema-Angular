@@ -42,10 +42,10 @@ export class TablePaginatorComponent implements OnChanges {
     if (this.isPaginate) {
       if (this.dataLength > this.dataSource.filteredData.length) {
         if (this.pageIndex <= event.pageIndex) {
-          this.skip = this.skip + 1;
+          this.skip = event.pageIndex + 1;
           this.paginatorAction.emit(this.skip);
         } else if (this.pageIndex > event.pageIndex) {
-          this.skip = this.skip - 1;
+          this.skip = event.pageIndex + 1;
           this.paginatorAction.emit(this.skip);
         }
       }
