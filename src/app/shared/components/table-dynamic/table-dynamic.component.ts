@@ -27,10 +27,7 @@ export class TableDynamicComponent implements OnChanges {
   @Input() pageIndex: number = 0;
   //#endregion
 
-  //#region [Buttons]
   @Input() hasAction: boolean;
-  @Input() actions: any;
-  //#endregion
 
   @Output() rowAction = new EventEmitter();
   @Output() sendPaginatorAction = new EventEmitter();
@@ -46,14 +43,14 @@ export class TableDynamicComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(): void {
-    if (this.columns && !this.action) {
-      this.addActionButtons();
-      this.columnsObject = this.columns.map((item) =>
-        typeof item.column === 'number' ? item.column.toString() : item.column
-      );
-    }
-
     if (this.dataSource) {
+      if (this.columns && !this.action) {
+        this.addActionButtons();
+        this.columnsObject = this.columns.map((item) =>
+          typeof item.column === 'number' ? item.column.toString() : item.column
+        );
+      }
+
       this.dataSource = new MatTableDataSource(this.dataSource);
       this.dataSource.sort = this.sort;
     }
@@ -68,9 +65,9 @@ export class TableDynamicComponent implements OnChanges {
         title: 'Actions',
       };
 
-      this.actions
-        ? (this.columns = [...this.columns, actionColumn])
-        : (this.columns = this.columns);
+      this.columns = [...this.columns, actionColumn];
+    } else {
+      this.columns = this.columns;
     }
   }
 

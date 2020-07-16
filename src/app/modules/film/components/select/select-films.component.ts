@@ -16,6 +16,7 @@ import { TableColumns } from './select-films.config';
 })
 export class SelectFilmsComponent implements OnInit {
   private roles: number[] = [];
+  private auxFilms: any[];
 
   films: Film[];
   film: Film;
@@ -58,16 +59,32 @@ export class SelectFilmsComponent implements OnInit {
           break;
       }
     });
+
+    if (this.actions.length > 0) {
+      this.hasAction = true;
+    }
   }
 
   ngOnInit(): void {
+    this.loadFilms();
+  }
+
+  loadFilms(): void {
     this.service.getAll().subscribe(
       (response) => {
         this.alert.success(`Number of Films: ${response.length}`);
 
-        this.films = response;
+        this.auxFilms = response;
       },
-      (error) => this.alert.danger(`Error: ${error}`)
+      (error) => this.alert.danger(`Error: ${error}`),
+      () => {
+        let aux: any[] = [];
+        this.auxFilms.forEach((item) => {
+          aux.push({ ...item, buttons: [...this.actions] });
+        });
+
+        this.films = aux;
+      }
     );
   }
 

@@ -21,5 +21,11 @@ export const TableButtons = [
       permission: 4,
       order: 3,
     },
+    add: {
+      name: 'add',
+      text: 'Add',
+      class: 'btn btn-success',
+      order: 4,
+    },
   },
 ];

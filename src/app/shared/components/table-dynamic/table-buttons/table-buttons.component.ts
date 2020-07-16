@@ -24,19 +24,21 @@ export class TableButtonsComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(): void {
-    let button: any[] = [];
-    this.actions.forEach((item) => {
-      if (this.buttonsConfig[0][item.column]) {
-        button.push({
-          ...item,
-          order: this.buttonsConfig[0][item.column].order,
-        });
-      }
-    });
+    if (this.actions) {
+      let button: any[] = [];
+      this.actions.forEach((item) => {
+        if (this.buttonsConfig[0][item.column]) {
+          button.push({
+            ...item,
+            order: this.buttonsConfig[0][item.column].order,
+          });
+        }
+      });
 
-    this.buttons = button.sort((a, b) =>
-      a.order.toString().localeCompare(b.order)
-    );
+      this.buttons = button.sort((a, b) =>
+        a.order.toString().localeCompare(b.order)
+      );
+    }
   }
 
   sendAction(action): void {

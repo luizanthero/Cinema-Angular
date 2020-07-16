@@ -40,4 +40,20 @@ export class FilmService {
       .map((response) => response as Film)
       .catch((error) => Observable.throw(error));
   }
+
+  create(entity: Film): Observable<any> {
+    return this.http
+      .post(`${this.baseUrl}`, entity, { headers: this.headers })
+      .map((response) => response as Film)
+      .catch((error) => Observable.throw(error));
+  }
+
+  isExist(films: any): Observable<any> {
+    return this.http
+      .post(`${this.baseUrl}/isExist`, films, {
+        headers: this.headers,
+      })
+      .map((response) => response)
+      .catch((error) => Observable.throw(error));
+  }
 }

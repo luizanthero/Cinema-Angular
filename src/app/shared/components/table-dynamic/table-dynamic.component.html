@@ -20,7 +20,7 @@
         {{ element[column.column] }}
         <div *ngIf="column.column === 'actions'">
           <cine-table-buttons
-            [actions]="actions"
+            [actions]="element.buttons"
             (buttonClick)="receiveAction($event, element)"
           ></cine-table-buttons>
         </div>
